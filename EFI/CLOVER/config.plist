@@ -26,6 +26,8 @@
 				<true/>
 				<key>FixTMR</key>
 				<true/>
+				<key>FixWAK</key>
+				<true/>
 			</dict>
 			<key>Patches</key>
 			<array>
@@ -115,76 +117,6 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change Method(_Q11,0,N) to XQ11</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1ExMQ==
-					</data>
-					<key>Replace</key>
-					<data>
-					WFExMQ==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Change Method(_Q12,0,N) to XQ12</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1ExMg==
-					</data>
-					<key>Replace</key>
-					<data>
-					WFExMg==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>Change Method(GPRW,2,N) to XPRW</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					R1BSVwI=
-					</data>
-					<key>Replace</key>
-					<data>
-					WFBSVwI=
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change Method(_PTS,1,N) to ZPTS, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1BUUwE=
-					</data>
-					<key>Replace</key>
-					<data>
-					WlBUUwE=
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
-					<string>change Method(_WAK,1,S) to ZWAK, pair with SSDT-PTSWAK.aml</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					X1dBSwk=
-					</data>
-					<key>Replace</key>
-					<data>
-					WldBSwk=
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>change _STA  to XSTA</string>
 					<key>Disabled</key>
 					<false/>
@@ -229,6 +161,90 @@
 					SERFRg==
 					</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change EHC1 to EH01</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					RUhDMQ==
+					</data>
+					<key>Replace</key>
+					<data>
+					RUgwMQ==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change EHC2 to EH02</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					RUhDMg==
+					</data>
+					<key>Replace</key>
+					<data>
+					RUgwMg==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>change XHC1 to XHC</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					WEhDMQ==
+					</data>
+					<key>Replace</key>
+					<data>
+					WEhDXw==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Change Method(_Q11,0,N) to XQ11</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X1ExMQ==
+					</data>
+					<key>Replace</key>
+					<data>
+					WFExMQ==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Change Method(_Q12,0,N) to XQ12</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					X1ExMg==
+					</data>
+					<key>Replace</key>
+					<data>
+					WFExMg==
+					</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Change Method(GPRW,2,N) to XPRW</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					R1BSVwI=
+					</data>
+					<key>Replace</key>
+					<data>
+					WFBSVwI=
+					</data>
+				</dict>
 			</array>
 		</dict>
 		<key>FixHeaders</key>
@@ -253,7 +269,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>dart=0</string>
+		<string>dart=0 darkwake=0 -igfxcflhdmi</string>
 		<key>CustomLogo</key>
 		<string>Theme</string>
 		<key>DefaultVolume</key>
@@ -263,7 +279,7 @@
 		<key>Log</key>
 		<false/>
 		<key>NeverHibernate</key>
-		<true/>
+		<false/>
 		<key>NoEarlyProgress</key>
 		<true/>
 		<key>Secure</key>
@@ -271,7 +287,7 @@
 		<key>SimpleThemeDark</key>
 		<string>LastBootedVolume</string>
 		<key>Timeout</key>
-		<integer>2</integer>
+		<integer>5</integer>
 		<key>XMPDetection</key>
 		<string>Yes</string>
 	</dict>
@@ -289,9 +305,9 @@
 			<key>AFGLowPowerState</key>
 			<false/>
 			<key>Inject</key>
-			<string>No</string>
+			<integer>77</integer>
 			<key>ResetHDA</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Properties</key>
 		<dict>
@@ -305,6 +321,34 @@
 				<key>AAPL,ig-platform-id</key>
 				<data>
 				AACbPg==
+				</data>
+				<key>device-id</key>
+				<data>
+				mz4AAA==
+				</data>
+				<key>framebuffer-con1-alldata</key>
+				<data>
+				AQUJAAAIAACHAQAA
+				</data>
+				<key>framebuffer-con1-enable</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con2-alldata</key>
+				<data>
+				AwQKAAAIAACHAQAA
+				</data>
+				<key>framebuffer-con2-enable</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con2-has-lspcon</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>framebuffer-con2-preferred-lspcon-mode</key>
+				<data>
+				AQAAAA==
 				</data>
 				<key>framebuffer-fbmem</key>
 				<data>
@@ -323,9 +367,11 @@
 		<key>USB</key>
 		<dict>
 			<key>AddClockID</key>
-			<true/>
+			<false/>
 			<key>FixOwnership</key>
-			<true/>
+			<false/>
+			<key>Inject</key>
+			<false/>
 			<key>NameEH00</key>
 			<false/>
 		</dict>
@@ -384,7 +430,7 @@
 		<key>AppleRTC</key>
 		<true/>
 		<key>DellSMBIOSPatch</key>
-		<false/>
+		<true/>
 		<key>KernelLapic</key>
 		<false/>
 		<key>KernelPm</key>
