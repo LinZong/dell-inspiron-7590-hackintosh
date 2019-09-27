@@ -10,6 +10,8 @@
 		<dict>
 			<key>Fixes</key>
 			<dict>
+				<key>AddHDMI</key>
+				<false/>
 				<key>FixHDA</key>
 				<false/>
 				<key>FixHPET</key>
@@ -213,6 +215,20 @@
 					QlJUWAKg
 					</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Rename HDAS to HDEF</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					SERBUw==
+					</data>
+					<key>Replace</key>
+					<data>
+					SERFRg==
+					</data>
+				</dict>
 			</array>
 		</dict>
 		<key>FixHeaders</key>
@@ -307,11 +323,9 @@
 		<key>USB</key>
 		<dict>
 			<key>AddClockID</key>
-			<false/>
+			<true/>
 			<key>FixOwnership</key>
-			<false/>
-			<key>Inject</key>
-			<false/>
+			<true/>
 			<key>NameEH00</key>
 			<false/>
 		</dict>

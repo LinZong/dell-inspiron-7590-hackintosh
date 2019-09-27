@@ -66,7 +66,11 @@ This is a Chinese version.
 
 **0x02 修复耳机孔发声不正常**
 
+> 2019年09月27日 Update增加patch AppleHDA的教程
+
 当您使用此EFI完成macOS安装进入系统，不出意外的话整个系统看上去是正常的，但是此时将耳机插入耳机孔，会发现音乐听不到人声，只能听到背景音，就好像耳机没有完全插入耳机孔一样。如果您进入系统偏好设置->声音->输出，将平衡滑条调到最左或者最右，却能听到人声。
+
+有时候系统重启、或者从睡眠中恢复，会发现喇叭变灰，找不到输出设备。
 
 这是因为这块声卡本质上是一块ALC3254，它layout与正常的ALC295不尽相同，并且AppleALC中针对ALC295的Patch是based on Dell Latitude 5290的。
 
@@ -92,33 +96,112 @@ This is a Chinese version.
 
 > ......
 
+网上也有很多教程教你如何下载AppleALC源码改layout、配合Linux的codec dump去拿到声卡的完整输出输入定义、PathMap，从而自制仿冒声卡的教程，诚然按照这些教程做下来肯定是相当完美，但是笔者经过几天的摸索发现其实完全不用这么复杂，只需要先Patch AppleHDA, 再利用pmset将hibernatemode设为0，最后写一个简单的Action在每次开机时自动纠正声卡输出即可。
+**注意, 本机型Patch AppleHDA的方式不能完全按照网上通用的Guide来做，有一些步骤需要改动**
 
+**注意, 请确保当前系统的AppleHDA没有经过任何修改**
 
-网上也有很多教程教你如何下载AppleALC源码改layout、配合Linux的codec dump去拿到声卡的完整输出输入定义、PathMap，从而自制仿冒声卡的教程，诚然按照这些教程做下来肯定是相当完美，但是笔者经过几天的摸索发现其实完全不用这么复杂，只要每次开机通过```hda-verb```发送一条HD-audio命令，去动态地```SET_PIN_WIDGET_CONTROL```纠正错误的PIN_WIDGET_CONTROL即可。
+1. Patch AppleHDA
 
-```
-hda-verb 0x19 0x707 0x20
-```
+   备份系统原版AppleHDA
 
-基于此思路，我们可以借助macOS的Automator，编写一段非常简单的动作，使得在每次用户登录的时候都执行一下上述命令纠正声卡输出即可。hda-verb工具以及生成的动作App已经附在Repo中。
-
-
-
-**以下操作假设hda-verb在/User/\<your-user-name>/目录下**
-
-1. 打开Automator, 选择"应用程序"
-
-2. 左侧任务列表中选择"运行Shell脚本"
-
-3. 右边空白文本区域输入
-
-   ```
-   cd ~
-   ./hda-verb 0x19 0x707 0x20
+   ```shell
+   sudo cp -R /System/Library/Extensions/AppleHDA.kext .
    ```
 
-4. 起英文名保存在一个容易发现的地方
+   此时AppleHDA原版已经复制到当前终端所在文件夹下。
 
-5. 系统偏好设置->用户与群组->登录项，添加刚才保存的App即可。
+   运行AppleHDAPatcher工具，拖入先前备份出来的原版AppleHDA
 
-6. 如果不出意外，每次登陆右上角通知Icon区域将会有小齿轮转1s左右，表明已经执行此命令纠正声卡输出。
+   选择Laptop -> ALC 295
+
+   点击Patch
+
+   完成后会在桌面生成`MironeAudio`文件夹
+
+2. 替换系统原版AppleHDA
+
+   ```shell
+   sudo cp -R ~/Desktop/MironeAudio/10ec0295/282.54/full Patched AppleHDA/AppleHDA.kext /System/Library/Extensions
+   # 10ec0295 和 282.54可能因人而异，需要根据实际情况替换。
+   sudo kextcache -i /
+   ```
+
+   等待系统重建缓存完成
+   
+3. 修改config.plist
+
+  首先确保ACPI设置中FixHDA, AddHDMI的勾选全部去掉，并且System IRQ修复已经应用（本仓库的config.plist已经完成此设置）
+  
+  然后DSDT补丁中添加一行（本仓库config.plist已完成设置）
+  
+  ```
+  Rename HDAS to HDEF, Find=48444153, Replace=48444546
+  ```
+  
+  "设备设置"中，Audio注入No，右边两个勾不要选。
+  
+  根据目前最新的AppleALC官方usage, 目前AppleALC已经不再使用设备设置来Inject，
+  
+  需要在下面的Properties中注入layout-id。本仓库的config.plist已经默认在PciRoot(0x0)/Pci(0x1f,0x3)上注入layout-id=77。如果其他用户发现对于这个设置而言效果不好，请按照接下来的步骤做，否则直接跳到下一点。
+  
+  重启电脑，目的是让Rename HDAS to HDEF被应用, 然后打开终端，分别输入
+  
+  ```
+  kextstat | grep AppleHDA
+  
+  kextstat | grep AppleALC
+  ```
+  
+  确保AppleALC前面的序号在AppleHDA之前。（AppleALC必须在AppleHDA之前被加载）
+  
+  使用gfxutil获取HDEF设备的PciRoot
+  
+  终端输入
+  
+  ```
+  ./gfxutil -f HDEF
+  ```
+  
+  记下DevicePath, 替换掉config.plist的Properties中的值，至于layout-id可以在13，28，77中来回试。默认AppleHDAPatch推荐的2和3对于戴尔来说**都是不能用的。**
+  
+  重启电脑。查看声音输出是否正常。
+
+
+4. 借助macOS的Automator，在每次用户登录的时候正声卡输出。hda-verb工具以及生成的动作App已经附在Repo中。
+
+	```
+	hda-verb 0x19 0x707 0x20
+	```
+	
+	首先尝试在终端下输入以上命令, 完成后插入耳机，平衡调到中间，测试耳机是否已经正常。如果正常，请继续操作，否则跳过下面全部设置，并上网找资料。
+	
+	以下操作假设hda-verb在/User/\<your-user-name>/目录下**
+	
+	
+	1. 打开Automator, 选择"应用程序"
+	
+	2. 左侧任务列表中选择"运行Shell脚本"
+	
+	3. 右边空白文本区域输入
+	
+	```
+	cd ~
+	./hda-verb 0x19 0x707 0x20
+	```
+	
+	
+	1. 起英文名保存在一个容易发现的地方
+	
+	2. 系统偏好设置->用户与群组->登录项，添加刚才保存的App即可。
+	
+	3. 如果不出意外，每次登陆右上角通知Icon区域将会有小齿轮转1s左右，表明已经执行此命令纠正声卡输出。
+
+**0x03 禁用睡眠**
+
+```shell
+sudo pmset -a standby 0
+sudo pmset -a hibernatemode 0
+```
+
+主要是修复电脑盒盖时间长后再次唤醒直接重启的问题。最好进入系统偏好设置->节能，在那边也把睡眠给关了。
