@@ -225,10 +225,12 @@ sudo touch /System/Library/Extensions && sudo kextcache -u /
 ​	如果机器出现盒盖休眠重启的情况，尝试执行以下终端命令，禁用休眠。
 
 ```shell
-sudo pmset -a standby 0
+sudo pmset -a sleep 0
+sudo pmset -a disablesleep 1
 sudo pmset -a hibernatemode 0
 sudo rm /var/vm/sleepimage
-sudo mkdir /var/vm/sleepimage
+sudo mkdir /var/mv/sleepimage
+
 ```
 
 ​	如果上述命令不能解决问题，尝试执行以下命令删掉PowerManagement配置文件。
