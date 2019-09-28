@@ -1,4 +1,4 @@
-## Dell Inspiron 7590 Hacktonish Guide
+## Dell Inspiron 7590 Hackintosh Guide
 
 English version is being written, please wait for a few days.
 
