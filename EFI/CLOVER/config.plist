@@ -274,12 +274,14 @@
 		<string>Theme</string>
 		<key>DefaultVolume</key>
 		<string>OSX</string>
+		<key>HibernationFixup</key>
+		<true/>
 		<key>Legacy</key>
 		<string>LegacyBiosDefault</string>
 		<key>Log</key>
 		<false/>
 		<key>NeverHibernate</key>
-		<false/>
+		<true/>
 		<key>NoEarlyProgress</key>
 		<true/>
 		<key>Secure</key>
