@@ -12,6 +12,8 @@ This is a Chinese version.
 
 **更新日志**
 
+>2019年09月30日 2019年09月30日 用FakeSMC替换掉VirtualSMC之后基本上没有再出现睡死的问题，推荐使用旧版本EFI的用户更新到此版本。
+>
 >2019年09月28日 新增Custom SSDT屏蔽无用USB接口，需要配合USBInjectAll使用。新增SSDT-ALC295，修正多次重启后找不到声卡的问题。
 >
 >2019年09月27日 增加patch AppleHDA的教程。
@@ -229,6 +231,7 @@ sudo touch /System/Library/Extensions && sudo kextcache -u /
 **0x04 禁用睡眠**
 
 ​	如果机器出现盒盖休眠重启的情况，尝试执行以下终端命令，禁用休眠。
+
 
 ```shell
 sudo pmset -a sleep 0
