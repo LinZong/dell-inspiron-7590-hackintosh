@@ -4,6 +4,12 @@ English version is being written, please wait for a few days.
 
 This is a Chinese version.
 
+**For HDMI output issue, I had opened a thread in tonymacx86, anyone who are interested in it please feel free to follow it. Let's make a better EFI! Thanks in advance!**
+
+**对于HDMI接口输出异常问题, 我在tonymacx86上开了一个帖子描述了这个情况，有兴趣解决此问题的用户欢迎去围观。让这份EFI文件变得更好!**
+
+[Dell Inspiron 7590 HDMI output no signal](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/)
+
 **更新日志**
 
 >2019年09月28日 新增Custom SSDT屏蔽无用USB接口，需要配合USBInjectAll使用。新增SSDT-ALC295，修正多次重启后找不到声卡的问题。
