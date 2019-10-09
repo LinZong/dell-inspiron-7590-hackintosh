@@ -12,6 +12,8 @@ This is a Chinese version.
 
 **更新日志**
 
+>2019年10月09日 合并一些SSDT补丁，修复了亮度调节键异常。感谢 [saintno1997](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/page-2)。
+>
 >2019年10月4日 作者更新到了10.14.6，移除了一些没用的SSDT Patch，优化在10.14.6下的睡眠质量。
 >
 >2019年09月30日 用FakeSMC替换掉VirtualSMC之后基本上没有再出现睡死的问题，推荐使用旧版本EFI的用户更新到此版本。
@@ -64,7 +66,7 @@ This is a Chinese version.
 
    独显无解，已屏蔽
 
-   调节亮度的组合键不是Fn+F6 Fn+F7，而是Fn+S, Fn+B（尝试BRT6 to BRTX失败。暂时没有深究原因）
+   ~~调节亮度的组合键不是Fn+F6 Fn+F7，而是Fn+S, Fn+B（尝试BRT6 to BRTX失败。暂时没有深究原因）~~ Thanks to [saintno1997](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/page-2), after some SSDT patches now brightness keys work normally.
 
    机器自带麦克风失效
 
