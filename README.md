@@ -12,6 +12,8 @@ This is a Chinese version.
 
 **更新日志**
 
+>2019年12月14日 测试兼容10.15.2，感谢[@CnTeng](https://github.com/CnTeng])的issue，以及[@tctien342](https://github.com/tctien342/Dell-Inspiron-7591-Hackintosh)的7591配置文件供参考。HDMI现已经可以正常输出。
+
 >2019年10月09日 合并一些SSDT补丁，修复了亮度调节键异常。感谢 [saintno1997](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/page-2)。
 >
 >2019年10月4日 作者更新到了10.14.6，移除了一些没用的SSDT Patch，优化在10.14.6下的睡眠质量。
@@ -60,6 +62,8 @@ This is a Chinese version.
 
    雷点3接口仅支持使用Typc-C设备
 
+   HDMI输出正常
+
 3. 不正常功能
 
    WIFI, 蓝牙无解
@@ -70,13 +74,13 @@ This is a Chinese version.
 
    机器自带麦克风失效
 
-   HDMI 输出不正常
-
-已测试系统版本: mojave 10.14.2 10.14.6
+已测试系统版本: mojave 10.14.2 10.14.6 10.15.2
 
 **0x01 如何使用**
 
 本EFI基于[@xiaoMGithub](https://github.com/xiaoMGitHub/LEGION_Y7000Series_Hackintosh_Clover)的拯救者Y7000配置文件。为了表示对作者的感谢，笔者保留了此EFI的Clover Theme，如有需要可以自行更换。
+
+本EFI的HDMI输出部分参考了[@tctien342](https://github.com/tctien342/Dell-Inspiron-7591-Hackintosh), 在此表示感谢。
 
 本EFI不区分安装时引导和正常引导，你可以使用这个EFI安装/引导使用Mojave。使用方法与其他EFI一样，替换引导介质EFI分区中的EFI文件即可。详细的安装过程请参考其他macOS安装指南。
 

@@ -159,20 +159,6 @@
 				</dict>
 				<dict>
 					<key>Comment</key>
-					<string>Change GFX0 to IGPU (needed for graphics)</string>
-					<key>Disabled</key>
-					<false/>
-					<key>Find</key>
-					<data>
-					R0ZYMA==
-					</data>
-					<key>Replace</key>
-					<data>
-					SUdQVQ==
-					</data>
-				</dict>
-				<dict>
-					<key>Comment</key>
 					<string>Rename BRT6 to BRTX, use with SSDT-BRT6.aml, SSDT-PNLF.aml, AppleBacklightInjector.kext, and VoodooPS2Controller.kext to fix brightness keys</string>
 					<key>Disabled</key>
 					<false/>
@@ -309,6 +295,20 @@
 					SERFRg==
 					</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Change GFX0 to IGPU (needed for graphics)</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>
+					R0ZYMA==
+					</data>
+					<key>Replace</key>
+					<data>
+					SUdQVQ==
+					</data>
+				</dict>
 			</array>
 		</dict>
 		<key>FixHeaders</key>
@@ -333,7 +333,7 @@
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>dart=0 darkwake=0</string>
+		<string>darkwake=1 agdpmod=vit9696 -wegnoegpu npci=0x2000</string>
 		<key>CustomLogo</key>
 		<string>Theme</string>
 		<key>DefaultVolume</key>
@@ -377,24 +377,47 @@
 		</dict>
 		<key>Properties</key>
 		<dict>
-			<key>PciRoot(0x0)/Pci(0x1f,0x3)</key>
-			<dict>
-				<key>layout-id</key>
-				<integer>77</integer>
-			</dict>
 			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
 			<dict>
 				<key>AAPL,ig-platform-id</key>
 				<data>
 				AACbPg==
 				</data>
+				<key>Comment-con1-con2</key>
+				<string>Type C port; can have 2 DisplayPort connectors</string>
+				<key>Comment-con3</key>
+				<string>HDMI port</string>
+				<key>Comment-dpcd-max-link-rate</key>
+				<string>0x14 for 4k displays, or 0x0a for 1080p</string>
+				<key>Comment-fb-portcount</key>
+				<string>There are 4 ports: internal LCD, Type C DP 1 and 2, and HDMI</string>
 				<key>device-id</key>
 				<data>
 				mz4AAA==
 				</data>
+				<key>dpcd-max-link-rate</key>
+				<data>
+				AAo=
+				</data>
+				<key>enable-cfl-backlight-fix</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>enable-dpcd-max-link-rate-fix</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>enable-hdmi20</key>
+				<data>
+				AQAAAA==
+				</data>
+				<key>enable-lspcon-support</key>
+				<data>
+				AQAAAA==
+				</data>
 				<key>framebuffer-con1-alldata</key>
 				<data>
-				AQUJAAAIAACHAQAA
+				AQUJAAAEAACHAQAA
 				</data>
 				<key>framebuffer-con1-enable</key>
 				<data>
@@ -402,32 +425,38 @@
 				</data>
 				<key>framebuffer-con2-alldata</key>
 				<data>
-				AwQKAAAIAACHAQAA
+				AgYJAAAEAACHAQAA
 				</data>
 				<key>framebuffer-con2-enable</key>
 				<data>
 				AQAAAA==
 				</data>
-				<key>framebuffer-con2-has-lspcon</key>
+				<key>framebuffer-con3-alldata</key>
+				<data>
+				AwQKAAAIAACHAQAA
+				</data>
+				<key>framebuffer-con3-enable</key>
 				<data>
 				AQAAAA==
 				</data>
-				<key>framebuffer-con2-preferred-lspcon-mode</key>
+				<key>framebuffer-con3-has-lspcon</key>
 				<data>
 				AQAAAA==
 				</data>
-				<key>framebuffer-fbmem</key>
+				<key>framebuffer-con3-preferred-lspcon-mode</key>
 				<data>
-				AACQAA==
+				AQAAAA==
 				</data>
 				<key>framebuffer-patch-enable</key>
 				<data>
 				AQAAAA==
 				</data>
-				<key>framebuffer-stolenmem</key>
+				<key>framebuffer-portcount</key>
 				<data>
-				AAAwAQ==
+				BAAAAA==
 				</data>
+				<key>model</key>
+				<string>Intel UHD Graphics 630 (Mobile) </string>
 			</dict>
 		</dict>
 		<key>USB</key>
@@ -484,7 +513,7 @@
 			<key>ATI</key>
 			<false/>
 			<key>Intel</key>
-			<false/>
+			<true/>
 			<key>NVidia</key>
 			<false/>
 		</dict>
@@ -618,17 +647,17 @@
 	<key>SMBIOS</key>
 	<dict>
 		<key>BiosReleaseDate</key>
-		<string>09/28/2018</string>
+		<string>10/24/2019</string>
 		<key>BiosVendor</key>
 		<string>Apple Inc.</string>
 		<key>BiosVersion</key>
-		<string>MBP151.88Z.F000.B00.1809280842</string>
+		<string>MBP161.88Z.F000.B00.1910242213</string>
 		<key>Board-ID</key>
-		<string>Mac-937A206F2EE63C01</string>
+		<string>Mac-E1008331FDC96864</string>
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardSerialNumber</key>
-		<string>C02816300GUJP4FJC</string>
+		<string>C02912501QX0000CB</string>
 		<key>BoardType</key>
 		<integer>10</integer>
 		<key>BoardVersion</key>
@@ -640,7 +669,7 @@
 		<key>ChassisType</key>
 		<string>0x09</string>
 		<key>EfiVersion</key>
-		<string>220.250.320.0.0</string>
+		<string>1037.40.127.0.0</string>
 		<key>Family</key>
 		<string>MacBook Pro</string>
 		<key>FirmwareFeatures</key>
@@ -654,15 +683,15 @@
 		<key>Mobile</key>
 		<true/>
 		<key>PlatformFeature</key>
-		<string>0x1A</string>
+		<string>0x02</string>
 		<key>ProductName</key>
-		<string>MacBookPro15,1</string>
+		<string>MacBookPro16,1</string>
 		<key>ProductName-Comment</key>
 		<string>Using Haswell MacBookAir6,2 until Clover has support for KabyLake identifiers</string>
 		<key>SerialNumber</key>
-		<string>C02WL0ZQKGYG</string>
+		<string>C02YG0HSPG8W</string>
 		<key>SmUUID</key>
-		<string>2C752CAC-E5C1-40F6-B4FD-028FB4D72509</string>
+		<string>CD39A315-49E1-42FC-8CFE-63CFBC740BBE</string>
 		<key>Version</key>
 		<string>1.0</string>
 	</dict>
