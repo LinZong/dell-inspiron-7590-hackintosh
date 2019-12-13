@@ -4,12 +4,6 @@ English version is being written, please wait for a few days.
 
 This is a Chinese version.
 
-**For HDMI output issue, I had opened a thread in tonymacx86, anyone who are interested in it please feel free to follow it. Let's make a better EFI! Thanks in advance!**
-
-**对于HDMI接口输出异常问题, 我在tonymacx86上开了一个帖子描述了这个情况，有兴趣解决此问题的用户欢迎去围观。让这份EFI文件变得更好!**
-
-[Dell Inspiron 7590 HDMI output no signal](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/)
-
 **更新日志**
 
 >2019年12月14日 测试兼容10.15.2，感谢[@CnTeng](https://github.com/CnTeng])的issue，以及[@tctien342](https://github.com/tctien342/Dell-Inspiron-7591-Hackintosh)的7591配置文件供参考。HDMI现已经可以正常输出。
