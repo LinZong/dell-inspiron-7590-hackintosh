@@ -6,6 +6,9 @@ This is a Chinese version.
 
 **更新日志**
 
+
+>2019年12月23日 添加DW1820A网卡蓝牙驱动，WIFI免驱，在10.15.2测试连接WIFI（2.4+5）、蓝牙、隔空投送成功。
+
 >2019年12月14日 测试兼容10.15.2，感谢[@CnTeng](https://github.com/CnTeng])的issue，以及[@tctien342](https://github.com/tctien342/Dell-Inspiron-7591-Hackintosh)的7591配置文件供参考。HDMI现已经可以正常输出。
 
 >2019年10月09日 合并一些SSDT补丁，修复了亮度调节键异常。感谢 [saintno1997](https://www.tonymacx86.com/threads/dell-inspiron-7590-hdmi-output-no-signal.284317/page-2)。
@@ -18,7 +21,7 @@ This is a Chinese version.
 >
 >2019年09月27日 增加patch AppleHDA的教程。
 
-**0x00 写在前面**
+### **0x00 写在前面**
 
 1. 配置
 
@@ -34,9 +37,9 @@ This is a Chinese version.
 
    Graphic card: Intel UHD 630， NVIDIA Geforce GTX 1650（已屏蔽)
 
-   WIFI: Intel Wireless AC 9560 (目前还没有换DW18)
+   WIFI: Intel Wireless AC 9560 (~~目前还没有换DW18~~已换DW1820A测试成功)
 
-   Bluetooth: WIFI芯片自带蓝牙，懒得查型号，Dell官方文档没给
+   Bluetooth: ~~WIFI芯片自带蓝牙，懒得查型号，Dell官方文档没给~~（已换DW1820A）
 
    Sound card: Realtek ALC3254(与ALC 295相似, 在Windows下查看Hardware id报告为ALC295, 故本EFI按照ALC295的思路驱动)
 
@@ -70,7 +73,7 @@ This is a Chinese version.
 
 已测试系统版本: mojave 10.14.2 10.14.6 10.15.2
 
-**0x01 如何使用**
+### **0x01 如何使用**
 
 本EFI基于[@xiaoMGithub](https://github.com/xiaoMGitHub/LEGION_Y7000Series_Hackintosh_Clover)的拯救者Y7000配置文件。为了表示对作者的感谢，笔者保留了此EFI的Clover Theme，如有需要可以自行更换。
 
@@ -80,7 +83,9 @@ This is a Chinese version.
 
 完成安装/引导启动macOS后请继续往下看。
 
-**0x02 修复耳机孔发声不正常**
+**注意：安装时要将原镜像中的EFI删除，然后将本EFI复制进去。亲测不可保留原EFI将本EFI覆盖进去的方式。**
+
+### **0x02 修复耳机孔发声不正常**
 
 当您使用此EFI完成macOS安装进入系统，不出意外的话整个系统看上去是正常的，但是此时将耳机插入耳机孔，会发现音乐听不到人声，只能听到背景音，就好像耳机没有完全插入耳机孔一样。如果您进入系统偏好设置->声音->输出，将平衡滑条调到最左或者最右，却能听到人声。
 
@@ -217,7 +222,7 @@ This is a Chinese version.
 	3. 如果不出意外，每次登陆右上角通知Icon区域将会有小齿轮转1s左右，表明已经执行此命令纠正声卡输出。
 	4. **如果您的电脑从睡眠中唤醒后发现声音又不正常了，请再次执行先前生成的App即可。笔者承认这样做确实很不优雅，但是笔者已经尝试在SSDT-ALC295.dsl里面加入自动使CodecCommander执行上述verb的Custom Command了但是它就是不work。如果有人知道原因还请不吝赐教。**
 
-**0x03 安装USBInjectAll**
+### **0x03 安装USBInjectAll**
 
 ​	遵照RehabMan大神的指南，执行以下终端命令
 
@@ -230,7 +235,7 @@ sudo touch /System/Library/Extensions && sudo kextcache -u /
 
 （当然如果睡眠没什么问题而您又没有强迫症的话可以不用关USB端口）
 
-**0x04 禁用睡眠**
+### **0x04 禁用睡眠**
 
 ​	如果机器出现盒盖休眠重启的情况，尝试执行以下终端命令，禁用休眠。
 
@@ -250,7 +255,7 @@ sudo mkdir /var/mv/sleepimage
 sudo rm cd /Library/Preferences/com.apple.PowerManagement*
 ```
 
-**0x05 为触控板安装驱动（如果触控板不正常的话）**
+### **0x05 为触控板安装驱动（如果触控板不正常的话）**
 
 ​	本EFi中已经放置VoodooPS2Controller.kext到kext/Other目录下了，一般情况下它是能够正常加载的。如果它加载不正常，您可能需要将这个kext安装到/S/L/E下, 具体操作为:
 
